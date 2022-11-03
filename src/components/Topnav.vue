@@ -5,6 +5,7 @@
       <li>菜单1</li>
       <li>菜单2</li>
     </ul>
+    <span class="toggleAside" @click="toggleMenu"></span>
   </div>
 </template>
 
@@ -13,8 +14,6 @@ import { inject, Ref } from 'vue'
   export default{
   setup() {
     const menuVisible = inject<Ref<boolean>>("menuVisible",false); // get
-    console.log(menuVisible.value);
-    
     const toggleMenu = () => {
       menuVisible.value = !menuVisible.value;
     };
@@ -46,4 +45,17 @@ import { inject, Ref } from 'vue'
     }
   }
 }
+    @media (max-width: 500px) {
+      >.menu {
+        display: none;
+      }
+  
+      >.logo {
+        margin: 0 auto;
+      }
+  
+      >.toggleAside {
+        display: inline-block;
+      }
+    }
 </style>
