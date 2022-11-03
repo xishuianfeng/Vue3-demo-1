@@ -39,12 +39,10 @@ import { inject, Ref } from 'vue'
     display: flex;
     white-space: nowrap;
     flex-wrap: nowrap;
-
     >li {
       margin: 0 1em;
     }
   }
-}
     @media (max-width: 500px) {
       >.menu {
         display: none;
@@ -58,4 +56,5 @@ import { inject, Ref } from 'vue'
         display: inline-block;
       }
     }
+  }
 </style>
