@@ -1,16 +1,16 @@
 <template>
   <template v-if="visible">
-    <div class="cai-dialog-overlay"></div>
+    <div class="cai-dialog-overlay" @click="closeOnClickOverlay"></div>
     <div class="cai-dialog-wrapper">
       <div class="cai-dialog">
-        <header>标题 <span class="cai-dialog-close"></span></header>
+        <header>标题 <span @click="close" class="cai-dialog-close"></span></header>
         <main>
           <p>第一行字</p>
           <p>第二行字</p>
         </main>
         <footer>
-          <Button level="main">OK</Button>
-          <Button>Cancel</Button>
+          <Button level="main" @click="ok">OK</Button>
+          <Button @click="cancel">Cancel</Button>
         </footer>
       </div>
     </div>
@@ -25,10 +25,42 @@ export default {
     visible: {
       type: Boolean,
       default: false
+    },
+    closeOnClickOverlay:{
+      type:Boolean,
+      default:true
+    },
+    ok:{
+      type:Function
+    },
+    cancel:{
+      type:Function
     }
   },
   components:{
     Button
+  },
+  setup(props,content){
+    const close = ()=>{
+      content.emit('update:visible',false)
+    }
+    const closeOnClickOverlay=()=>{
+      if(props.closeOnClickOverlay){
+        close()
+      }
+    }
+    const ok = () =>{
+      if(props.ok && props.ok?.() !== false){
+   // if (props.ok && props.ok?.() !== false) { // 同上等价
+        close()
+      }
+    }
+    const cancel=()=>{
+      if (props.cancel && props.cancel() !== false) {
+        close()
+      }
+    }
+    return { close, closeOnClickOverlay, cancel ,ok}
   }
 }
 </script>
