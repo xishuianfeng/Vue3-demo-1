@@ -1,27 +1,34 @@
 <template>
-  <template v-if="visible">
-    <div class="cai-dialog-overlay" @click="closeOnClickOverlay"></div>
-    <div class="cai-dialog-wrapper">
-      <div class="cai-dialog">
-        <header>标题 <span @click="close" class="cai-dialog-close"></span></header>
-        <main>
-          <p>第一行字</p>
-          <p>第二行字</p>
-        </main>
-        <footer>
-          <Button level="main" @click="ok">OK</Button>
-          <Button @click="cancel">Cancel</Button>
-        </footer>
+  <Teleport to="body">
+    <template v-if="visible">
+      <div class="cai-dialog-overlay" @click="closeOnClickOverlay"></div>
+      <div class="cai-dialog-wrapper">
+        <div class="cai-dialog">
+          <header>
+            {{ title }}
+            <span @click="close" class="cai-dialog-close"></span>
+          </header>
+          <main>
+            <slot />
+          </main>
+          <footer>
+            <Button level="main" @click="ok">OK</Button>
+            <Button @click="cancel">Cancel</Button>
+          </footer>
+        </div>
       </div>
-    </div>
-  </template>
-
+    </template>
+  </Teleport>
 </template>
 
 <script lang="ts">
 import Button from './Button.vue';
 export default {
   props: {
+    title:{
+      type:String,
+      default:'标题'
+    },
     visible: {
       type: Boolean,
       default: false
