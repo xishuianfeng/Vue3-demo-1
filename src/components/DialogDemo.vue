@@ -7,8 +7,8 @@
     <div>hi!</div>
   </Dialog>
   
-  <h1>示例2</h1>
-  <Button @click="showDialog">toggle</Button>
+  <!-- <h1>示例2</h1>
+  <Button @click="showDialog">toggle</Button> -->
 </template>
 
 <script>
